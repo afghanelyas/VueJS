@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJs</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.tailWindcss.com"></script>
+</head>
+<body class="h-full grid place-items-center" >
+        <div id="app">
+            <section>
+                <h2 class="font-bold mb-2">Asssignemt</h2>
+                <ul>
+                   <li v-for="assignment in assignments">
+                        <label>
+                            {{assignment.name}}
+                            <input type="checkbox" v-model="assignment.done">
+                        </label>
+                   </li>
+                </ul>
+                <pre>
+                    {{assignments}}
+                </pre>
+            </section>
+        </div>
+
+    <script>
+        let app = {
+            data(){
+                return{
+                    assignments: [
+                        {name: "Finish project", done: false},
+                        {name: "Read Chapter", done: false},
+                        {name: "Turn in homework", done: false}
+                    ]
+                }
+            }
+        }
+        Vue.createApp(app).mount("#app")
+    </script>
+</body>
+</html>
