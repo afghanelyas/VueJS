@@ -11,21 +11,11 @@
     <div id="app" class="w-1/2">
         <app-button>Submit</app-button>
     </div>
-    <script>
+    <script type="module">
+        import AppButton from './js/components/AppButton.js'
         let app = {
             components: {
-                'app-button': {
-                    template: `
-                       <button class="bg-blue-500 text-white px-4 py-2 rounded disabled:cursor-not-allowed" :disabled="proccessing">
-                            <slot />
-                        </button>
-                    `,
-                    data() {
-                        return {
-                            proccessing: true
-                        }
-                    },
-                }
+                'app-button': AppButton
             }
         }
 
