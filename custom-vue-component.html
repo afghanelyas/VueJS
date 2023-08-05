@@ -6,20 +6,49 @@
     <title>VueJs</title>
     <script src="https://unpkg.com/vue@3"></script>
     <script src="https://cdn.tailWindcss.com"></script>
+    <style>
+        .is-loading {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+}
+.is-loading:after {
+            content: " ";
+            display: block;
+            border-radius: 50%;
+            width: 0;
+            height: 0;
+            margin: 8px;
+            box-sizing: border-box;
+            border: 32px solid #fff;
+            border-color: #fff transparent #fff transparent;
+            animation: lds-hourglass 1.2s infinite;
+}
+@keyframes  is-loading {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+
+    </style>
 </head>
 <body class="h-full grid place-items-center" >
     <div id="app" class="w-1/2">
-        <app-button>Submit</app-button>
+        <app-button :processing="is-loading" >Submit</app-button>
     </div>
     <script type="module">
-        import AppButton from './js/components/AppButton.js'
-        let app = {
-            components: {
-                'app-button': AppButton
-            }
-        }
+        import App from './js/components/App.js'
 
-        Vue.createApp(app).mount('#app')
+        Vue.createApp(App).mount('#app')
 
     </script>
 </body>
