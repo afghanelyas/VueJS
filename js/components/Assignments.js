@@ -3,15 +3,25 @@ import AssignmentCreate from "./AssignmentCreate.js"
 export default {
     components: {AssignmentList , AssignmentCreate},
     template: `
-        <section class="space-y-6">
-            <assignment-list :assignments="filters.inProgress" title="In prograss" ></assignment-list>
-            <assignment-list :assignments="filters.completed" title="Completed" ></assignment-list>
+        <section class="gap-8 flex">
+            <assignment-list :assignments="filters.inProgress" title="In prograss" >
+                    <assignment-create @add="add"></assignment-create>
+            </assignment-list>
+            <div v-show="showCompleted">
+            <assignment-list 
+                    
+                    :assignments="filters.completed"
+                    title="Completed"
+                    can-toggle
+                    @toggle="showCompleted = !showCompleted"
+                ></assignment-list>
+            </div>
         </section>
-       <assignment-create @add="add"></assignment-create>
     `,
     data(){
         return{
             assignments: [],
+            showCompleted: true
         }
     },
     computed: {
@@ -24,7 +34,7 @@ export default {
     },
 
     created(){
-        fetch('http://localhost:3002/assignments')
+        fetch('http://localhost:3001/assignments')
             .then(response => response.json())
             .then((assignments) => {
                 this.assignments = assignments
